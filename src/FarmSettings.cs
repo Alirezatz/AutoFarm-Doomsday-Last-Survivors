@@ -45,7 +45,7 @@ namespace FesticalAutoFarm
             var settings = new FarmSettings { SchemaVersion = 3 };
             for (int i = 0; i < FarmSettingsStore.MaximumFarmSlots; i++)
             {
-                settings.Slots.Add(new FarmSlotSettings { Resource = (FarmResource)i });
+                settings.Slots.Add(new FarmSlotSettings { Resource = (FarmResource)(i % 4) });
             }
 
             return settings;

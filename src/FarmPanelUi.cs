@@ -673,7 +673,10 @@ namespace FesticalAutoFarm
             if (mapScan == null || !mapScan.HasScanned || !mapScan.HasUsableNodeSnapshot)
                 return "Open the world map to load nodes";
 
-            string resourceName = ResourceNames[(int)slot.Resource];
+            string resourceName;
+            if (!TryGetResourceName(slot, out resourceName))
+                return "Invalid resource selection";
+
             if (assignment == null || assignment.Node == null)
                 return "No unowned " + resourceName + " node available";
 
@@ -751,12 +754,13 @@ namespace FesticalAutoFarm
             for (int i = 0; i < availableSlots; i++)
             {
                 FarmSlotSettings slot = settings.Slots[i];
-                if (!slot.Enabled)
+                string resourceName;
+                if (!slot.Enabled || !TryGetResourceName(slot, out resourceName))
                     continue;
 
                 NearestResourceNodeInfo nearestSufficientNode = FindNearestAvailableNode(
                     mapScan.LoadedResourceNodes,
-                    ResourceNames[(int)slot.Resource],
+                    resourceName,
                     slot.TargetAmount,
                     usedNodeIds,
                     true);
@@ -773,9 +777,13 @@ namespace FesticalAutoFarm
                 if (!slot.Enabled || assignments[i] != null)
                     continue;
 
+                string resourceName;
+                if (!TryGetResourceName(slot, out resourceName))
+                    continue;
+
                 NearestResourceNodeInfo nearestAvailableNode = FindNearestAvailableNode(
                     mapScan.LoadedResourceNodes,
-                    ResourceNames[(int)slot.Resource],
+                    resourceName,
                     0,
                     usedNodeIds,
                     false);
@@ -787,6 +795,19 @@ namespace FesticalAutoFarm
             }
 
             return assignments;
+        }
+
+        private static bool TryGetResourceName(FarmSlotSettings slot, out string resourceName)
+        {
+            int resourceIndex = slot == null ? -1 : (int)slot.Resource;
+            if (resourceIndex < 0 || resourceIndex >= ResourceNames.Length)
+            {
+                resourceName = null;
+                return false;
+            }
+
+            resourceName = ResourceNames[resourceIndex];
+            return true;
         }
 
         private static NearestResourceNodeInfo FindNearestAvailableNode(

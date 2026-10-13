@@ -1,0 +1,9 @@
+# Local build and IDE artifacts.
+**/bin/
+**/obj/
+.vs/
+*.user
+*.suo
+
+# Release packages are distributed as GitHub Release assets.
+Festical Auto Farm.zip

@@ -17,7 +17,8 @@ gathering marches. Press **F8** to open or close the mod panel.
 2. Start the game once after installing MelonLoader. The first launch may take
    longer while the loader initializes and creates its files.
 3. Close the game completely.
-4. Download **Festical Auto Farm.zip** from this repository's GitHub Releases.
+4. Download
+   [AutoFarm-Doomsday-Last-Survivors-v1.0.0.zip from the v1.0.0 release](https://github.com/Alirezatz/AutoFarm-Doomsday-Last-Survivors/releases/tag/v1.0.0).
    The ZIP is a release download, not a file in the source repository.
 5. Extract the ZIP directly into the game's `Mods` folder. Make sure
    `Festical Auto Farm.dll` is directly inside `Mods`, not inside an extra
@@ -76,8 +77,11 @@ dotnet build ".\Festical Auto Farm.csproj" -c Release -p:DeployToMods=false
 ## Releases
 
 Installable ZIP files belong in GitHub Releases and are not committed to the
-source repository. The release ZIP should contain `Festical Auto Farm.dll` at
-its root so it extracts directly into the game's `Mods` folder.
+source repository. The
+[v1.0.0 release](https://github.com/Alirezatz/AutoFarm-Doomsday-Last-Survivors/releases/tag/v1.0.0)
+contains `AutoFarm-Doomsday-Last-Survivors-v1.0.0.zip` with
+`Festical Auto Farm.dll` at its root so it extracts directly into the game's
+`Mods` folder.
 
 ## Community
 
